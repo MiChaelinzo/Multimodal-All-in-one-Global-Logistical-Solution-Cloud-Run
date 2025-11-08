@@ -1,0 +1,36 @@
+# requirements.txt
+Pillow
+
+requests
+# Optional Libraries (install based on features needed)
+
+gTTS
+SpeechRecognition
+# PyAudio (often needed by SpeechRecognition, install separately if issues persist)
+streamlit-webrtc
+av
+audiorecorder
+# Core Streamlit and Google AI
+streamlit
+google-generativeai
+
+# File/Document Processing
+pypdf
+python-docx
+pandas
+openpyxl
+beautifulsoup4
+
+# Web and APIs
+requests
+newsapi-python
+
+# Audio and Video Processing
+gTTS
+SpeechRecognition
+streamlit-webrtc
+av
+streamlit-audiorecorder
+
+# PDF Generation
+fpdf

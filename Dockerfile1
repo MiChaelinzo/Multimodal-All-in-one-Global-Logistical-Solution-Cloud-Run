@@ -1,0 +1,36 @@
+# 1. Use an official Python runtime as a parent image
+FROM python:3.9-slim
+
+# 2. Update the package list and install system dependencies for pyaudio
+#    - build-essential: Installs the C/C++ compilers (like gcc)
+#    - portaudio19-dev & libasound2-dev: The development libraries that pyaudio needs to build
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    portaudio19-dev \
+    libasound2-dev \
+ && apt-get clean 
+
+# 3. Set the working directory in the container
+WORKDIR /app
+
+# 4. Copy the requirements file and install dependencies
+COPY requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 5. Copy the rest of your application code into the container
+COPY . .
+
+# 6. Expose the port Streamlit will run on
+EXPOSE 8080
+
+# Define environment variable
+ENV PORT=8080
+
+# 7. The command to run your Streamlit application
+CMD ["streamlit", "run", "app.py", "--server.port", "$PORT", "--server.address", "0.0.0.0"]
+# (Previous lines in your Dockerfile remain the same)
+
+# Define environment variable for Cloud Run. The shell will substitute $PORT.
+# This is the most robust method.
+#CMD ["streamlit", "run", "your_script_name.py", "--server.port", "$PORT", "--server.enableCORS", "false"]

@@ -1,0 +1,5 @@
+libpulse-dev
+swig
+ffmpeg
+wmctrl  
+espeak-ng
